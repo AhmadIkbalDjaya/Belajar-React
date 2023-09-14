@@ -126,6 +126,9 @@ export default function ProductsPage() {
           </table>
         </div>
       </div>
+      <div className="my-5 flex justify-center">
+        <Counter></Counter>
+      </div>
     </Fragment>
   );
 }
