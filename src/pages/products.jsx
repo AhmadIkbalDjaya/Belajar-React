@@ -1,7 +1,6 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import CardProduct from "../components/Fragments/CardProduct";
 import Button from "../components/Elements/Button";
-import Counter from "../components/Fragments/Counter";
 
 const products = [
   {
@@ -34,7 +33,6 @@ export default function ProductsPage() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    // setCart([{ id: 1, qty: 1 }]);
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []);
 
@@ -66,6 +64,15 @@ export default function ProductsPage() {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
+
+  // useRef
+  const cartRef = useRef(JSON.parse(localStorage.getItem("cart")) || []);
+
+  const handleAddToCartRef = (id) => {
+    cartRef.current = [...cartRef.current, { id, qty: 1 }];
+    localStorage.setItem("cart", JSON.stringify(cartRef.current));
+  };
+
   return (
     <Fragment>
       <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
@@ -86,7 +93,7 @@ export default function ProductsPage() {
                 <CardProduct.Footer
                   id={product.id}
                   price={product.price}
-                  handleAddToCart={handleAddToCart}
+                  handleAddToCart={handleAddToCartRef}
                 />
               </CardProduct>
             );
@@ -104,7 +111,7 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => {
+              {cartRef.current.map((item) => {
                 const product = products.find(
                   (product) => product.id === item.id
                 );
@@ -129,7 +136,7 @@ export default function ProductsPage() {
                   </tr>
                 );
               })}
-              <tr>
+              {/* <tr>
                 <td colSpan={3}>
                   <b>Total Price</b>
                 </td>
@@ -142,7 +149,7 @@ export default function ProductsPage() {
                     })}
                   </b>
                 </td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>
