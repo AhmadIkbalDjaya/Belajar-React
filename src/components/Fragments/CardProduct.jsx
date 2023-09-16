@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Elements/Button";
 
 export default function CardProduct(props) {
@@ -10,11 +11,15 @@ export default function CardProduct(props) {
 }
 
 const Header = (props) => {
-  const { image } = props;
+  const { image, id } = props;
   return (
-    <a href="#">
-      <img src={image} alt="product" className="p-8 rounded-t-lg h-60 w-full object-cover" />
-    </a>
+    <Link to={`/product/${id}`}>
+      <img
+        src={image}
+        alt="product"
+        className="p-8 rounded-t-lg h-60 w-full object-cover"
+      />
+    </Link>
   );
 };
 const Body = (props) => {
@@ -39,7 +44,7 @@ const Footer = (props) => {
         ${" "}
         {price.toLocaleString("id-ID", { styles: "currency", currency: "USD" })}
       </span>
-      <Button classname="bg-blue-600" onClick={()=>handleAddToCart(id)}>
+      <Button classname="bg-blue-600" onClick={() => handleAddToCart(id)}>
         Add to Card
       </Button>
     </div>
