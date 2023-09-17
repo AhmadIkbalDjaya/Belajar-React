@@ -32,7 +32,7 @@ export default function DetailProductPage() {
                 ${product.price}
               </div>
               <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
-                {/* Review {product.rating.count} */}
+                Review {product.rating.rate} / 5 ({product.rating.count})
               </div>
             </div>
             <div className="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
