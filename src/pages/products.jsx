@@ -7,7 +7,7 @@ import Navbar from "../components/Layouts/Navbar";
 import { DarkMode } from "../context/DarkMode";
 
 export default function ProductsPage() {
-  const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
+  const { isDarkMode } = useContext(DarkMode);
   const [products, setProducts] = useState([]);
   useLogin();
 
@@ -20,7 +20,9 @@ export default function ProductsPage() {
   return (
     <Fragment>
       <Navbar />
-      <div className={`flex justify-center py-5 ${isDarkMode && "bg-slate-900"}`}>
+      <div
+        className={`flex justify-center py-5 ${isDarkMode && "bg-slate-900"}`}
+      >
         <div className="w-4/6 flex flex-wrap">
           {products.length > 0 &&
             products.map((product) => {
